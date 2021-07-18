@@ -9,17 +9,24 @@ docker-compose up (you must have docker-compose installed https://docs.docker.co
 ## Informations
 
 POSTGRSQL_CONTAINER_NAME: postgres_container
+
 POSTGRES_USER: user
+
 POSTGRES_PASSWORD: userpwd
 
+
 PGADMIN_EMAIL: pgadmin4@pgadmin.org
+
 PGADMIN_PASSWORD: admin
 
+
 GRAFANA_USER: admin
+
 GRAFANA_PASSWORD: admin
 
 ## Endpoints
  / => home (methods = ["GET"]) 
+ 
  /predict => prediction (methods = ["GET","POST"])
  
     Body example : { "PassengerId":343,
