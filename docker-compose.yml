@@ -1,0 +1,58 @@
+version: '3.5'
+
+services:
+
+
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: userpwd
+      POSTGRES_DB: tuto
+    volumes:
+       - postgres:/var/lib/postgresql/
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+       - pgadmin:/root/.pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  flask:
+    container_name: flask_container
+    build: .
+    ports:
+    - "5000:5000"
+    networks:
+      - postgres
+    depends_on:
+      - postgres
+
+  grafana:
+    container_name: grafana_container
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+    postgres:
+    pgadmin:
