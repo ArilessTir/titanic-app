@@ -1,6 +1,6 @@
 # titanic-app
 
-ML API with a postgre and a grafana for Titanic prediction
+ML API with a postgres and a grafana for Titanic prediction
 
 ## Run docker-compose
 
